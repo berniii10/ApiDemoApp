@@ -2,6 +2,6 @@
 {
     public class Model
     {
-        public List<Movie> Movies { get; set; } = new List<Movie>();
+        public List<Movie> movies { get; set; } = new List<Movie>();
     }
 }
