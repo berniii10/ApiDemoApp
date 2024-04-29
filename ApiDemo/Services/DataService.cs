@@ -7,7 +7,7 @@ namespace ApiDemo.Services
     {
         public DataService() { }
 
-        private readonly string json_data_path = "../data.json";
+        private readonly string json_data_path = "data.json";
 
         public bool loadData(ref Model? model)
         {
