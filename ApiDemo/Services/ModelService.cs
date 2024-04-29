@@ -11,15 +11,17 @@ namespace ApiDemo.Services
 
         public bool GetMovie(int id, ref Movie _movie)
         {
-            foreach (var movie in model.Movies)
+            if (model.movies != null)
             {
-                if (movie.Id == id)
+                foreach (var movie in model.movies)
                 {
-                    _movie = movie;
-                    return true;
+                    if (movie.Id == id)
+                    {
+                        _movie = movie;
+                        return true;
+                    }
                 }
             }
-
             return false;
         }
     }
