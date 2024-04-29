@@ -6,7 +6,7 @@ namespace ApiDemo.Models
     {
         public string name { get; set; } = string.Empty;
         public string last_name { get; set; } = string.Empty;
-        public int age { get; set; } = int.MaxValue;
+        public int? age { get; set; } = int.MaxValue;
         public string birthday { get; set; } = string.Empty;
     }
 }

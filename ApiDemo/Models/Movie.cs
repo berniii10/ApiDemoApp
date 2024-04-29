@@ -15,7 +15,7 @@ namespace ApiDemo.Models
         // [JsonConverter(typeof(StringEnumConverter<Genre>))]
         public List<String> genre { get; set; } = new List<String>();
         
-        public int rating { get; set; }
+        public double rating { get; set; }
         
         public string summary { get; set; } = string.Empty;
         
