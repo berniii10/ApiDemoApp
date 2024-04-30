@@ -17,6 +17,7 @@ jobs:
       - name: Get last 8 digits of commit hash
         id: get_hash
         run: |
+          chmod +x getHash.sh
           hash=$(./getHash.sh)
           echo "::set-output name=hash::$hash"
 
