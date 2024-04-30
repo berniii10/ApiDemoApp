@@ -18,9 +18,17 @@ namespace ApiDemo.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            Model model = new Model();
+            if (modelService.getAllMovies(ref model) == true)
+            {
+                return this.Ok(new { Model = model, Status = "OK" });
+            }
+            else
+            {
+                return NotFound(new { Message = "Movies = null", Status = "OK" });
+            }
         }
 
         // GET api/MoviesController

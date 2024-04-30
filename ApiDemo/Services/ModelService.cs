@@ -4,16 +4,26 @@ namespace ApiDemo.Services
 {
     public class ModelService
     {
-        Model model { get; set; }
-        public ModelService(Model _model) {
-            model = _model;
+        Model _model { get; set; }
+        public ModelService(Model model) {
+            _model = model;
+        }
+
+        public bool getAllMovies(ref Model model)
+        {
+            if (_model == null) return false;
+            else
+            {
+                model = _model;
+                return true;
+            }
         }
 
         public bool GetMovie(int id, ref Movie _movie)
         {
-            if (model.movies != null)
+            if (_model.movies != null)
             {
-                foreach (var movie in model.movies)
+                foreach (var movie in _model.movies)
                 {
                     if (movie.Id == id)
                     {
