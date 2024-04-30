@@ -34,5 +34,19 @@ namespace ApiDemo.Services
             }
             return false;
         }
+
+        public bool AddMovie(ref Movie movie)
+        {
+            foreach (var _movie in _model.movies)
+            {
+                if (_movie.Id == movie.Id || _movie.title.Equals(movie.title))
+                {
+                    movie = _movie;
+                    return false;
+                }
+            }
+            _model.movies.Add(movie);
+            return true;
+        }
     }
 }

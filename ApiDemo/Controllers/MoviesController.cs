@@ -23,7 +23,7 @@ namespace ApiDemo.Controllers
             Model model = new Model();
             if (modelService.getAllMovies(ref model) == true)
             {
-                return this.Ok(new { Model = model, Status = "OK" });
+                return Ok(new { Model = model, Status = "OK" });
             }
             else
             {
@@ -38,7 +38,7 @@ namespace ApiDemo.Controllers
             Movie movie = new Movie();
             if (modelService.GetMovie(id, ref movie) == true)
             {
-                return this.Ok(new { Movie = movie, Status = "OK" });
+                return Ok(new { Movie = movie, Status = "OK" });
             }
             else
             {
@@ -48,13 +48,21 @@ namespace ApiDemo.Controllers
 
         // POST api/<MoviesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] Movie movie)
         {
+            if (modelService.AddMovie(ref movie) == true)
+            {
+                return Ok(new { Message = "Movie Added.", Movie = movie, Status = "OK" });
+            }
+            else
+            {
+                return Conflict(new { Message = "Movie already exists or there is a movie with that ID.", ID = movie.Id, ExistingMovie = movie, Status = "OK" });
+            }
         }
 
         // PUT api/<MoviesController>/
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] Movie movie)
         {
         }
 
