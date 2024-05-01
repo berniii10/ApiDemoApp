@@ -4,26 +4,26 @@ namespace ApiDemo.Services
 {
     public class ModelService
     {
-        Model _model { get; set; }
+        Model model { get; set; }
         public ModelService(Model model) {
-            _model = model;
+            this.model = model;
         }
 
         public bool getAllMovies(ref Model model)
         {
-            if (_model == null) return false;
+            if (this.model == null) return false;
             else
             {
-                model = _model;
+                model = this.model;
                 return true;
             }
         }
 
         public bool GetMovie(int id, ref Movie _movie)
         {
-            if (_model.movies != null)
+            if (model.movies != null)
             {
-                foreach (var movie in _model.movies)
+                foreach (var movie in model.movies)
                 {
                     if (movie.Id == id)
                     {
@@ -37,7 +37,7 @@ namespace ApiDemo.Services
 
         public bool AddMovie(ref Movie movie)
         {
-            foreach (var _movie in _model.movies)
+            foreach (var _movie in model.movies)
             {
                 if (_movie.Id == movie.Id || _movie.title.Equals(movie.title))
                 {
@@ -45,8 +45,35 @@ namespace ApiDemo.Services
                     return false;
                 }
             }
-            _model.movies.Add(movie);
+            model.movies.Add(movie);
+            model.movies = model.movies.OrderBy(movie => movie.Id).ToList();
             return true;
+        }
+
+        public bool UpdateMovie(int id, ref Movie movie)
+        {
+            for (int i = 0; i < model.movies.Count(); i++)
+            {
+                if (model.movies[i].Id == id)
+                {
+                    model.movies[i] = movie;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool DeleteMovie(int id)
+        {
+            for (int i = 0; i < model.movies.Count(); i++)
+            {
+                if (model.movies[i].Id == id)
+                {
+                    model.movies.RemoveAt(i);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

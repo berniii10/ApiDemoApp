@@ -52,7 +52,7 @@ namespace ApiDemo.Controllers
         {
             if (modelService.AddMovie(ref movie) == true)
             {
-                return Ok(new { Message = "Movie Added.", Movie = movie, Status = "OK" });
+                return Ok(new { Message = "Movie Added.", Status = "OK" });
             }
             else
             {
@@ -62,14 +62,30 @@ namespace ApiDemo.Controllers
 
         // PUT api/<MoviesController>/
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Movie movie)
+        public IActionResult Put(int id, [FromBody] Movie movie)
         {
+            if (modelService.UpdateMovie(id, ref movie) == true)
+            {
+                return Ok(new { Message = "Movie Updated.", Status = "OK" });
+            }
+            else
+            {
+                return NotFound(new { Id = id, Message = "Movie not found", Status = "OK" });
+            }
         }
 
         // DELETE api/<MoviesController>/
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            if (modelService.DeleteMovie(id) == true)
+            {
+                return Ok(new { Message = "Movie Deleted.", Status = "OK" });
+            }
+            else
+            {
+                return NotFound(new { Id = id, Message = "Movie not found", Status = "OK" });
+            }
         }
     }
 }
