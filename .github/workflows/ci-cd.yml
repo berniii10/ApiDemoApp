@@ -47,6 +47,9 @@ jobs:
           Write-Output "Last 8 digits of commit hash: $hash"
           echo "::set-output name=hash::$hash"
 
+      - name: Pull Windows Base Image
+        run: docker pull mcr.microsoft.com/dotnet/sdk:8.0-windowsservercore-ltsc2022
+
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
