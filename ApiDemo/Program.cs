@@ -11,8 +11,13 @@ try
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
+    // Define the data service
     var dataService = new DataService();
+
+    // Define the model
     Model? model = null;
+
+    // Tries to load the model from the Json file
     if (dataService.loadData(ref model))
     {
         if (model != null) // It will never be null because it is tested in loadData, but it is also to get rid of warnings
