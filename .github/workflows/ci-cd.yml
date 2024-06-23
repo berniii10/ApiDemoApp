@@ -17,9 +17,12 @@ jobs:
       - name: Get last 8 digits of commit hash
         id: get_hash
         # chmod +x getHash.sh
+        # hash=$(./getHash.sh)
+        # echo "Last 8 digits of commit hash: $hash"
+        # echo "::set-output name=hash::$hash"
         run: |
-          hash=$(./getHash.sh)
-          echo "Last 8 digits of commit hash: $hash"
+          hash = (git rev-parse --short=8 HEAD)
+          Write-Output "Last 8 digits of commit hash: $hash"
           echo "::set-output name=hash::$hash"
 
       - name: Login to Docker Hub
