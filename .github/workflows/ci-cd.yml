@@ -21,7 +21,7 @@ jobs:
         # echo "Last 8 digits of commit hash: $hash"
         # echo "::set-output name=hash::$hash"
         run: |
-          hash = (git rev-parse --short=8 HEAD)
+          $hash = (git rev-parse --short=8 HEAD)
           Write-Output "Last 8 digits of commit hash: $hash"
           echo "::set-output name=hash::$hash"
 
