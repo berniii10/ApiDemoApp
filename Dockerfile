@@ -1,5 +1,5 @@
-# Use the official dotnet SDK image
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+# Use the official dotnet SDK image for Windows
+FROM mcr.microsoft.com/dotnet/sdk:8.0-windowsservercore-ltsc2022 AS build
 
 # Set the working directory in the container
 WORKDIR /app
@@ -23,7 +23,7 @@ RUN dotnet build -c Release -o /app/build
 RUN dotnet publish -c Release -o /app/publish
 
 # Final stage/image
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-windowsservercore-ltsc2022 AS runtime
 
 # Set the working directory in the container
 WORKDIR /app
@@ -36,4 +36,3 @@ EXPOSE 80
 
 # Command to run the application
 ENTRYPOINT ["dotnet", "ApiDemo.dll"]
-
