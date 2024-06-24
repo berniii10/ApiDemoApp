@@ -13,6 +13,9 @@ RUN dotnet restore
 # Copy the remaining source code to the working directory
 COPY ApiDemo/ ./
 
+# Copy data.json to the working directory
+COPY data.json /app/data.json
+
 # Build the project
 RUN dotnet build -c Release -o /app/build
 
@@ -30,6 +33,9 @@ WORKDIR /app
 
 # Copy the published output from the build stage to the runtime stage
 COPY --from=build /app/publish .
+
+# Copy data.json from build stage to runtime stage
+COPY --from=build /app/data.json .
 
 # Expose the port your application listens on
 EXPOSE 80
