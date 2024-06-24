@@ -6,6 +6,12 @@ try
 {
     var builder = WebApplication.CreateBuilder(args);
 
+    // Configure Kestrel to listen on all network interfaces
+    builder.WebHost.ConfigureKestrel(serverOptions =>
+    {
+        serverOptions.ListenAnyIP(80); // Listen on port 80 for HTTP
+    });
+
     builder.Services.AddControllers();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
     builder.Services.AddEndpointsApiExplorer();
