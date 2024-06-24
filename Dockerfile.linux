@@ -14,7 +14,7 @@ RUN dotnet restore
 COPY ApiDemo/ ./
 
 # Copy data.json to the working directory
-COPY data.json /app/data.json
+COPY ApiDemo/data.json /app/data.json
 
 # Build the project
 RUN dotnet build -c Release -o /app/build
